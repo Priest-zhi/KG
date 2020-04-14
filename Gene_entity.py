@@ -10,7 +10,14 @@ def GTF2GENE_entity(file='data/gtf.csv'):
             if not line:
                 break
             if line["feature"] == "gene":
-                GeneNode = Node("GENE", **line)
+                node={}
+                for ele in line:
+                    if "." in ele:
+                        newele = ele.replace('.', '_')
+                        node[newele]=line[ele]
+                    else:
+                        node[ele] = line[ele]
+                GeneNode = Node("GENE", **node)
                 GENEgraph.create(GeneNode)
 
                 nodecount+=1
