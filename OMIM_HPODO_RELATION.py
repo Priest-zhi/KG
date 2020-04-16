@@ -2,7 +2,7 @@ import csv
 from py2neo import Graph, Node, Relationship
 
 
-def CreateOMIM_HPO_RELATIONSHIP(file='data/OMIM_HPODO.csv'):
+def CreateOMIM_HPO_RELATIONSHIP(file='data/OMIM_HPO.csv'):
     RelCount=0
     OHgraph = Graph("http://localhost:7474")
     with open(file, 'r') as fr:
