@@ -1,7 +1,7 @@
 import csv
 from py2neo import Graph, Node, Relationship
 
-OBOArrayField=['xref','synonym','is_a','alt_id','intersection_of','relationship']
+OBOArrayField=['xref','synonym','is_a','alt_id','intersection_of','relationship','property_value']
 #input file: xxx.obo
 #input type: HPO, DO, SO, GO
 def CreateOBOEntity(file, type):
@@ -87,5 +87,6 @@ if __name__ == '__main__':
     #CreateOBOEntity("data/so.obo","SO")
     #CreateOBOEntity("data/doid.obo", "DO")
     #CreateOBOEntity("data/go.obo", "GO")
-    CreateOBOEntity("data/CTD_diseases.obo", "Disease")
+    #CreateOBOEntity("data/CTD_diseases.obo", "Disease")
+    CreateOBOEntity("data/CTD_exposure_ontology.obo", "Exposure")
     print("ALL done!")
