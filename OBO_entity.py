@@ -57,6 +57,24 @@ def CreateOBOEntity(file, type):
                             NewNodeEnd = Node(type, id=childid)
                             childrelation = Relationship(currentNode,'father',NewNodeEnd)
                         OBOgraph.create(childrelation)
+                if type=='Disease':
+                    if 'alt_id' in node:
+                        for altele in node['alt_id']:
+                            if "DO" in altele:
+                                DOID = altele.strip()[3:] #DOID:xxxx
+                                childExitNode = OBOgraph.nodes.match('DO', id=DOID).first()
+                                if childExitNode:
+                                    childrelation = Relationship(currentNode, 'alt', childExitNode)
+                                    OBOgraph.create(childrelation)
+                            elif "OMIM" in altele:
+                                OMIMID = altele.strip()
+                                childExitNode = OBOgraph.nodes.match('OMIM', id=OMIMID).first()
+                                if childExitNode:
+                                    childrelation = Relationship(currentNode, 'alt', childExitNode)
+                                    OBOgraph.create(childrelation)
+                            else:
+                                continue
+
 
                 nodecount+=1
                 if nodecount%100==0:
@@ -65,7 +83,9 @@ def CreateOBOEntity(file, type):
 
 
 if __name__ == '__main__':
+    #CreateOBOEntity("data/hp.obo","HPO")
     #CreateOBOEntity("data/so.obo","SO")
     #CreateOBOEntity("data/doid.obo", "DO")
-    CreateOBOEntity("data/go.obo", "GO")
+    #CreateOBOEntity("data/go.obo", "GO")
+    CreateOBOEntity("data/CTD_diseases.obo", "Disease")
     print("ALL done!")
