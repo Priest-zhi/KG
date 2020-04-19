@@ -48,13 +48,13 @@ def CreateOBOEntity(file, type):
                     currentNode=NewNode
                 #create relationship
                 if 'is_a' in node:
-                    for childele in node['is_a']:
-                        childid = childele.split(' ! ')[0].strip()
-                        childExitNode = OBOgraph.nodes.match(type, id=childid).first()
-                        if childExitNode:
-                            childrelation = Relationship(currentNode, 'father', childExitNode)
+                    for Parentele in node['is_a']:
+                        Parentid = Parentele.split(' ! ')[0].strip()
+                        ParentExitNode = OBOgraph.nodes.match(type, id=Parentid).first()
+                        if ParentExitNode:
+                            childrelation = Relationship(currentNode, 'father', ParentExitNode)
                         else:
-                            NewNodeEnd = Node(type, id=childid)
+                            NewNodeEnd = Node(type, id=Parentid)
                             childrelation = Relationship(currentNode,'father',NewNodeEnd)
                         OBOgraph.create(childrelation)
                 if type=='Disease':
@@ -62,15 +62,15 @@ def CreateOBOEntity(file, type):
                         for altele in node['alt_id']:
                             if "DO" in altele:
                                 DOID = altele.strip()[3:] #DOID:xxxx
-                                childExitNode = OBOgraph.nodes.match('DO', id=DOID).first()
-                                if childExitNode:
-                                    childrelation = Relationship(currentNode, 'alt', childExitNode)
+                                AltExitNode = OBOgraph.nodes.match('DO', id=DOID).first()
+                                if AltExitNode:
+                                    childrelation = Relationship(currentNode, 'alt', AltExitNode)
                                     OBOgraph.create(childrelation)
                             elif "OMIM" in altele:
                                 OMIMID = altele.strip()
-                                childExitNode = OBOgraph.nodes.match('OMIM', id=OMIMID).first()
-                                if childExitNode:
-                                    childrelation = Relationship(currentNode, 'alt', childExitNode)
+                                AltExitNode = OBOgraph.nodes.match('OMIM', id=OMIMID).first()
+                                if AltExitNode:
+                                    childrelation = Relationship(currentNode, 'alt', AltExitNode)
                                     OBOgraph.create(childrelation)
                             else:
                                 continue
