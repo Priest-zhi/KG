@@ -88,5 +88,5 @@ if __name__ == '__main__':
     #CreateOBOEntity("data/doid.obo", "DO")
     #CreateOBOEntity("data/go.obo", "GO")
     #CreateOBOEntity("data/CTD_diseases.obo", "Disease")
-    CreateOBOEntity("data/CTD_exposure_ontology.obo", "Exposure")
+    CreateOBOEntity("data/CTD_exposure_ontology.obo", "ExO")
     print("ALL done!")
